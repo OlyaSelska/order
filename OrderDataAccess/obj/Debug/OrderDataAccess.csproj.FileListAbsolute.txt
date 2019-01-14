@@ -1,0 +1,15 @@
+C:\Users\1\source\repos\Order\OrderDataAccess\bin\Debug\OrderDataAccess.dll.config
+C:\Users\1\source\repos\Order\OrderDataAccess\bin\Debug\OrderDataAccess.dll
+C:\Users\1\source\repos\Order\OrderDataAccess\bin\Debug\OrderDataAccess.pdb
+C:\Users\1\source\repos\Order\OrderDataAccess\bin\Debug\EntityFramework.dll
+C:\Users\1\source\repos\Order\OrderDataAccess\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\1\source\repos\Order\OrderDataAccess\bin\Debug\EntityFramework.xml
+C:\Users\1\source\repos\Order\OrderDataAccess\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\1\source\repos\Order\OrderDataAccess\obj\Debug\OrderDataAccess.csprojAssemblyReference.cache
+C:\Users\1\source\repos\Order\OrderDataAccess\obj\Debug\OrderDataAccess.csproj.CoreCompileInputs.cache
+C:\Users\1\source\repos\Order\OrderDataAccess\obj\Debug\OrderDataAccess.csproj.CopyComplete
+C:\Users\1\source\repos\Order\OrderDataAccess\obj\Debug\OrderDataAccess.dll
+C:\Users\1\source\repos\Order\OrderDataAccess\obj\Debug\OrderDataAccess.pdb
+C:\Users\1\source\repos\Order\OrderDataAccess\bin\Debug\Newtonsoft.Json.dll
+C:\Users\1\source\repos\Order\OrderDataAccess\bin\Debug\Newtonsoft.Json.pdb
+C:\Users\1\source\repos\Order\OrderDataAccess\bin\Debug\Newtonsoft.Json.xml

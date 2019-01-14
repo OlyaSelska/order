@@ -1,0 +1,6 @@
+C:\Users\1\source\repos\Order\OrderDatabase\bin\Debug\OrderDatabase.dacpac
+C:\Users\1\source\repos\Order\OrderDatabase\bin\Debug\OrderDatabase.dll
+C:\Users\1\source\repos\Order\OrderDatabase\bin\Debug\OrderDatabase.pdb
+C:\Users\1\source\repos\Order\OrderDatabase\obj\Debug\OrderDatabase.sqlprojAssemblyReference.cache
+C:\Users\1\source\repos\Order\OrderDatabase\obj\Debug\OrderDatabase.dll
+C:\Users\1\source\repos\Order\OrderDatabase\obj\Debug\OrderDatabase.pdb
