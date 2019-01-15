@@ -13,8 +13,10 @@ namespace OrderService.Tests
 		public TestOrderContext()
 		{
 			this.Orders = new TestOrderDbSet();
-		}
+			this.Products = new TestProductDbSet();
 
+		}
+		
 		public DbSet<Order> Orders { get; set; }
 		public DbSet<Product> Products { get; set; }
 

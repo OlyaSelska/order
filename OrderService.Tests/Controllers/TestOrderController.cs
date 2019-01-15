@@ -4,8 +4,12 @@ using OrderService.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Http;
+using System.Web.Http.Results;
 
 namespace OrderService.Tests.Controllers
 {
@@ -13,78 +17,179 @@ namespace OrderService.Tests.Controllers
 	public class TestOrderController
 	{
 		[TestMethod]
-		private List<Product> GetTestProducts()
+		private ICollection<Product> GetTestProducts()
 		{
-			var context = new TestOrderContext();
-
 			var testProducts = new List<Product>();
-
-			//testProducts.Add(context.Products.Add(new Product { Id = 1, Name = "orange", Price = 2.34, Unit = 1 }));
-			//testProducts.Add(context.Products.Add(new Product { Id = 2, Name = "apple", Price = 2, Unit = 5 }));
-			//testProducts.Add(context.Products.Add(new Product { Id = 3, Name = "pineapple", Price = 3.4, Unit = 3 }));
-			//testProducts.Add(context.Products.Add(new Product { Id = 4, Name = "banana", Price = 1, Unit = 1 }));
-			//testProducts.Add(context.Products.Add(new Product { Id = 5, Name = "strawberry", Price = 4.8, Unit = 2 }));
 			testProducts.Add(new Product { Id = 1, Name = "orange", Price = 2.34, Unit = 1 });
 			testProducts.Add(new Product { Id = 2, Name = "apple", Price = 2, Unit = 5 });
-			testProducts.Add(new Product { Id = 3, Name = "pineapple", Price = 3.4, Unit = 3 });
-			testProducts.Add(new Product { Id = 4, Name = "banana", Price = 1, Unit = 1 });
-			testProducts.Add(new Product { Id = 5, Name = "strawberry", Price = 4.8, Unit = 2 });
 
 			return testProducts;
 		}
 
-		[TestMethod]
-		private List<Order> GetTestOrders()
+		private TestOrderContext GetOrder()
 		{
 			var context = new TestOrderContext();
-
-			var testOrders = new List<Order>();
-
-			testOrders.Add(context.Orders.Add(new Order
-			{
-				Id = 1,
-				Email = "ololo@gmail.com",
-				DeliveryAddress = "Ukraine, Kyiv, Shevchenka32" ,
-				Products = GetTestProducts().Where(t => (t.Id == 1 && t.Id == 2)).ToList()
-			}));
-			testOrders.Add(context.Orders.Add(new Order
+			context.Orders.Add(new Order
 			{
 				Id = 2,
 				Email = "iypiter@gmail.com",
-				DeliveryAddress = "Ukraine, storozhynets, Soborna5a",
-				Products = GetTestProducts().Where(t => (t.Id == 4 && t.Id == 3)).ToList()
-			}));
-			testOrders.Add(context.Orders.Add(new Order
-			{
-				Id = 3,
-				Email = "earth@gmail.com",
-				DeliveryAddress = "Ukraine, Chernivtsi, Simovycha19",
-				Products = GetTestProducts().Where(t => (t.Id == 5 && t.Id == 2)).ToList()
-			}));
-			testOrders.Add(context.Orders.Add(new Order
-			{
-				Id = 4,
-				Email = "neptun@gmail.com",
 				DeliveryAddress = "Ukraine, Chernivtsi, Ruska287",
 				Products = GetTestProducts().Where(t => (t.Id == 1 && t.Id == 4 && t.Id == 2)).ToList()
-			}));
-
-			return testOrders;
+			});
+			context.Orders.Add(new Order
+			{
+				Id = 3,
+				Email = "iypiter@gmail.com",
+				DeliveryAddress = "Ukraine, Chernivtsi, Ruska287",
+				Products = GetTestProducts().Where(t => (t.Id == 5 && t.Id == 2)).ToList()
+			});
+			context.Orders.Add(new Order
+			{
+				Id = 4,
+				Email = "iypiter@gmail.com",
+				DeliveryAddress = "Ukraine, Chernivtsi, Ruska287",
+				Products = GetTestProducts().Where(t => (t.Id == 4 && t.Id == 3)).ToList()
+			});
+			return context;
 		}
 
 		[TestMethod]
 		public void GetAllOrders()
 		{
-			var context = new TestOrderContext();
-			context.Orders.Add(new Order { Id = 1, Email = "iypiter@gmail.com", DeliveryAddress = "Ukraine, Chernivtsi, Ruska287" });
-			context.Orders.Add(new Order { Id = 2, Email = "iypiter@gmail.com", DeliveryAddress = "Ukraine, Chernivtsi, Ruska287" });
-			context.Orders.Add(new Order { Id = 3, Email = "iypiter@gmail.com", DeliveryAddress = "Ukraine, Chernivtsi, Ruska287" });
-			context.Orders.Add(new Order { Id = 4, Email = "iypiter@gmail.com", DeliveryAddress = "Ukraine, Chernivtsi, Ruska287" });
-			
-			var controller = new OrdersController(context);
-			var result = controller.GetOrders() as IEnumerable<Order>;
+			var controller = new OrdersController(GetOrder());
+			IEnumerable<Order> result = controller.GetOrders();
 			Assert.IsNotNull(result);
-			Assert.AreEqual(4, result.Count());
+			Assert.AreEqual(3, result.Count());
 		}
+
+		[TestMethod]
+		public void GetOrderById()
+		{
+			// Set up Prerequisites
+			var controller = new OrdersController(GetOrder());
+			// Act  
+			Order result = controller.GetOrders(2);
+
+			// Assert  
+			Assert.IsNotNull(result);
+		}
+
+		[TestMethod]
+		public void GetAllOrders_CheckContainsProducts()
+		{
+			// Set up Prerequisites   
+			var controller = new OrdersController(GetOrder());
+			// Act  
+			Order result = controller.GetOrders(2);
+
+			// Assert  
+			Assert.IsNotNull(result.Products);
+		}
+
+		[TestMethod]
+		public void GetOrderById_CheckContainsProduct()
+		{
+			// Set up Prerequisites   
+			var controller = new OrdersController(GetOrder());
+			// Act  
+			Order result = controller.GetOrders(2);
+
+			// Assert  
+			Assert.IsNotNull(result.Products);
+		}
+
+		[TestMethod]
+		public void CreateOrder_ReturnsCreatedResponse()
+		{
+			
+			// Arrange
+			var context = new TestOrderContext();
+
+			var testProducts = new List<Product>();
+			foreach (var product in GetTestProducts())
+			{
+				testProducts.Add(context.Products.Add(product));
+			}
+
+			context.Orders.Add(new Order
+			{
+				Id = 1,
+				Email = "iypiter@gmail.com",
+				DeliveryAddress = "Ukraine, Chernivtsi, Ruska287",
+				Products = testProducts
+			});
+
+			var controller = new OrdersController(context);
+			// Act  
+			var createdResponse = controller.CreateOrder(context.Orders.FirstOrDefault()) as NegotiatedContentResult<string>;
+			
+			// Assert
+			Assert.AreEqual(HttpStatusCode.Created, createdResponse.StatusCode);
+		}
+
+		[TestMethod]
+		public void CreateOrder_ReturnsBadResponse()
+		{
+
+			// Arrange
+			var context = new TestOrderContext();
+
+			var testProducts = new List<Product>();
+			foreach (var product in GetTestProducts())
+			{
+				testProducts.Add(context.Products.Add(product));
+			}
+
+			context.Orders.Add(new Order
+			{
+				Id = 1,
+				Email = "",
+				DeliveryAddress = "Ukraine, Chernivtsi, Ruska287",
+				Products = testProducts
+			});
+
+			var controller = new OrdersController(context);
+			// Act  
+			var createdResponse = controller.CreateOrder(context.Orders.FirstOrDefault()) as InvalidModelStateResult;
+
+			// Assert
+			Assert.AreEqual(false, createdResponse.ModelState.IsValid);
+		}
+
+		//[TestMethod]
+		//public void GetOrderById_CheckProductUnitValid()
+		//{
+		//	// Set up Prerequisites   
+
+		//	var context = new TestOrderContext();
+		//	context.Orders.Add(new Order
+		//	{
+		//		Id = 2,
+		//		Email = "iypiter@gmail.com",
+		//		DeliveryAddress = "Ukraine, Chernivtsi, Ruska287",
+		//		Products = GetTestProducts().Where(t => (t.Id == 1 && t.Id == 4 && t.Id == 2)).ToList()
+		//	});
+		//	context.Orders.Add(new Order
+		//	{
+		//		Id = 3,
+		//		Email = "iypiter@gmail.com",
+		//		DeliveryAddress = "Ukraine, Chernivtsi, Ruska287",
+		//		Products = GetTestProducts().Where(t => (t.Id == 5 && t.Id == 2)).ToList()
+		//	});
+		//	context.Orders.Add(new Order
+		//	{
+		//		Id = 4,
+		//		Email = "iypiter@gmail.com",
+		//		DeliveryAddress = "Ukraine, Chernivtsi, Ruska287",
+		//		Products = GetTestProducts().Where(t => (t.Id == 4 && t.Id == 3)).ToList()
+		//	});
+
+		//	var controller = new OrdersController(context);
+		//	// Act  
+		//	Order result = controller.GetOrders(2);
+
+		//	// Assert  
+		//	Assert.
+		//}
 	}
 }
