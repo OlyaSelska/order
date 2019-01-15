@@ -18,7 +18,6 @@ C:\Users\1\source\repos\Order\OrderService.Tests\bin\Debug\System.Web.Razor.dll
 C:\Users\1\source\repos\Order\OrderService.Tests\bin\Debug\System.Web.WebPages.Deployment.dll
 C:\Users\1\source\repos\Order\OrderService.Tests\bin\Debug\System.Web.WebPages.dll
 C:\Users\1\source\repos\Order\OrderService.Tests\bin\Debug\System.Web.WebPages.Razor.dll
-C:\Users\1\source\repos\Order\OrderService.Tests\bin\Debug\System.Web.Optimization.dll
 C:\Users\1\source\repos\Order\OrderService.Tests\bin\Debug\OrderDataAccess.dll
 C:\Users\1\source\repos\Order\OrderService.Tests\bin\Debug\EntityFramework.dll
 C:\Users\1\source\repos\Order\OrderService.Tests\bin\Debug\OrderService.pdb
@@ -35,7 +34,6 @@ C:\Users\1\source\repos\Order\OrderService.Tests\bin\Debug\System.Web.Razor.xml
 C:\Users\1\source\repos\Order\OrderService.Tests\bin\Debug\System.Web.WebPages.xml
 C:\Users\1\source\repos\Order\OrderService.Tests\bin\Debug\System.Web.WebPages.Deployment.xml
 C:\Users\1\source\repos\Order\OrderService.Tests\bin\Debug\System.Web.WebPages.Razor.xml
-C:\Users\1\source\repos\Order\OrderService.Tests\bin\Debug\System.Web.Optimization.xml
 C:\Users\1\source\repos\Order\OrderService.Tests\bin\Debug\OrderDataAccess.pdb
 C:\Users\1\source\repos\Order\OrderService.Tests\bin\Debug\OrderDataAccess.dll.config
 C:\Users\1\source\repos\Order\OrderService.Tests\bin\Debug\EntityFramework.xml
