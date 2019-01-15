@@ -155,41 +155,5 @@ namespace OrderService.Tests.Controllers
 			// Assert
 			Assert.AreEqual(false, createdResponse.ModelState.IsValid);
 		}
-
-		//[TestMethod]
-		//public void GetOrderById_CheckProductUnitValid()
-		//{
-		//	// Set up Prerequisites   
-
-		//	var context = new TestOrderContext();
-		//	context.Orders.Add(new Order
-		//	{
-		//		Id = 2,
-		//		Email = "iypiter@gmail.com",
-		//		DeliveryAddress = "Ukraine, Chernivtsi, Ruska287",
-		//		Products = GetTestProducts().Where(t => (t.Id == 1 && t.Id == 4 && t.Id == 2)).ToList()
-		//	});
-		//	context.Orders.Add(new Order
-		//	{
-		//		Id = 3,
-		//		Email = "iypiter@gmail.com",
-		//		DeliveryAddress = "Ukraine, Chernivtsi, Ruska287",
-		//		Products = GetTestProducts().Where(t => (t.Id == 5 && t.Id == 2)).ToList()
-		//	});
-		//	context.Orders.Add(new Order
-		//	{
-		//		Id = 4,
-		//		Email = "iypiter@gmail.com",
-		//		DeliveryAddress = "Ukraine, Chernivtsi, Ruska287",
-		//		Products = GetTestProducts().Where(t => (t.Id == 4 && t.Id == 3)).ToList()
-		//	});
-
-		//	var controller = new OrdersController(context);
-		//	// Act  
-		//	Order result = controller.GetOrders(2);
-
-		//	// Assert  
-		//	Assert.
-		//}
 	}
 }
